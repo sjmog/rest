@@ -49,3 +49,10 @@ For each of these, a RESTful route defines the **next state** of the machine, an
 * A well-designed application is a **state machine**. That is, it is a machine capable of being in various states.
 * Using GET, DELETE, POST and so on, with well-formed URIs, is the way that a user navigates through different states of the machine.
 * Each action the user takes returns a resource showing the next state of the application.
+
+### What's this repo?
+
+An application where you:
+
+- Are given a RESTful route and have to identify the resource, and the state that the application will be in after visiting this route
+- Are given a resource and a desired state for the application, and have to write a RESTful route for it
