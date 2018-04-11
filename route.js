@@ -190,8 +190,8 @@ const renderNextButton = () => {
   });
 };
 
-const renderRetryButton = () => {
-  const button = `<button class="button--retry">Retry</button>`;
+const renderResetButton = () => {
+  const button = `<button class="button--retry">Reset</button>`;
   ANSWER_COMPONENTS.actions.html(button);
   $('.button--retry').on('click', resetAnswerForm);
 };
@@ -217,7 +217,7 @@ const handleAnswer = (isAnswerCorrect) => {
   } else {
     flashScreen("red");
     ANSWER_COMPONENTS.status.html("<p>Nope!</p>");
-    renderRetryButton();
+    renderResetButton();
   };
 };
 
