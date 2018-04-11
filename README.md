@@ -28,7 +28,7 @@ Representations tie URLs to actions a user might want to take with these resourc
 
 RESTful routes define a consistent way of addressing these resources.
 
-#### Stateless
+#### Web applications are state machines and REST defines their interface
 
 REST is a set of rules that you don't have to follow – you won't get any errors for writing bad routes. Your application will still 'work' – it'll just be confusing to other developers.
 
