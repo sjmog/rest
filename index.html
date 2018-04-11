@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Learn REST</title>
+  <script
+    src="https://code.jquery.com/jquery-2.2.4.min.js"
+    integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" type="text/css" href="./style.css">
+</head>
+<body>
+  <main class="question">
+    <div class="question__part">
+      <h2>Current Application State</h2>
+      <p class="question__state"></p>
+    </div>
+    <div class="question__part">
+      <h2>Request Route</h2>
+      <code class="question__route"></code>
+    </div>
+  </main>
+  
+  <aside class="answer">
+    <form class="answer__form">
+      <div class="answer__fieldset">
+        <div class="answer__part">
+          <div class="answer__resource">
+            <label for="resource">Requested resource</label>
+            <input type="text" name="resource" placeholder="e.g. bookmark" />
+          </div>
+        </div>
+        <div class="answer__part">
+          <label>Next application state</label>
+          <div class="answer__state"></div>
+        </div>
+      </div>
+
+      <div class="answer__fieldset">
+        <input type="submit" value="Submit" />
+      </div>
+    </form>
+
+    <div class="answer__status"></div>
+    <div class="answer__actions"></div>
+  </aside>
+
+  <script type="text/javascript" src="./index.js"></script>
+</body>
+</html>

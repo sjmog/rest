@@ -54,5 +54,22 @@ For each of these, a RESTful route defines the **next state** of the machine, an
 
 An application where you:
 
-- Are given a RESTful route and have to identify the resource, and the state that the application will be in after visiting this route
-- Are given a resource and a desired state for the application, and have to write a RESTful route for it
+- Are given a RESTful route and have to identify the resource, and the state that the application will be in after visiting this route (done!)
+- Are given a resource and a desired state for the application, and have to write a RESTful route for it (:construction:)
+
+### Running the application
+
+Serve the index.html. For example:
+
+```
+npm install -g serve
+serve
+```
+
+or just
+
+```
+open index.html
+```
+
+> You've gotta use an ES6-compatible browser.
