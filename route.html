@@ -6,6 +6,7 @@
     src="https://code.jquery.com/jquery-2.2.4.min.js"
     integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
     crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/json5@^1.0.0"></script>
   <link rel="stylesheet" type="text/css" href="./style.css">
 </head>
 <body>
@@ -30,6 +31,13 @@
 
   <a href="./index.html" class="navigation">Go to 'Understanding Resources and States'</a>
 
+  <a href="https://github.com/sjmog/rest/blob/master/docs/README.md" target="_blank" class="help">Help</a>
+
+  <div class="toggle">
+    <div class="toggle__basic toggle--selected">Basic</div>
+    <div class="toggle__advanced">Advanced</div>
+  </div>
+
   <aside class="answer">
     <form class="answer__form">
       <div class="answer__fieldset">
@@ -52,7 +60,12 @@
             <input type="text" name="path" placeholder="e.g. /bookmarks" />
           </div>
         </div>
+
+        <div class="answer__part">
+          <div class="answer__advanced"></div>
+        </div>
       </div>
+
 
       <div class="answer__fieldset">
         <input type="submit" value="Submit" />

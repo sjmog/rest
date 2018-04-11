@@ -59,13 +59,21 @@ h1 {
   color: #cdcdcd;
 }
 
-.navigation {
+.navigation, .help {
   position: absolute;
-  right: 10px;
-  top: 10px;
   text-transform: uppercase;
   letter-spacing: 0.15em !important;
   color: #cdcdcd;
+}
+
+.navigation {
+  right: 10px;
+  top: 10px;
+}
+
+.help {
+  left: 10px;
+  bottom: 10px;
 }
 
 body {
@@ -193,7 +201,7 @@ input[type="submit"]:focus, button:focus {
   border-color: #222;
 }
 
-h1, h2, p, input, label, button, select, a {
+h1, h2, p, input, label, button, select, a, .toggle {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
   font-weight: 300;
   letter-spacing: 0.02em
@@ -245,4 +253,49 @@ code {
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.2em;
+}
+
+.toggle {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  display: flex;
+}
+
+.toggle__basic, .toggle__advanced {
+  border: 1px solid #cdcdcd;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.05s ease-in-out;
+}
+
+.toggle__basic:hover, .toggle__advanced:hover {
+  background-color: #fafafa;
+}
+
+.toggle__basic:active, .toggle__advanced:active {
+  background-color: #afafaf;
+}
+
+.toggle__basic {
+  border-right: none;
+  border-top-left-radius: 80px;
+  border-bottom-left-radius: 80px;
+}
+
+.toggle__advanced {
+  border-top-right-radius: 80px;
+  border-bottom-right-radius: 80px;
+}
+
+.toggle--selected {
+  background-color: #cdcdcd;
+}
+
+.toggle--selected:hover {
+  background-color: #bebebe;
+}
+
+.toggle--selected:active {
+  background-color: #afafaf;
 }

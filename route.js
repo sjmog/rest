@@ -5,14 +5,22 @@ const QUESTION_COMPONENTS = {
 };
 
 const ANSWER_COMPONENTS = {
-  form:    $('.answer__form'),
-  path:    $('.answer__path'),
-  verb:    $('.answer__verb'),
-  status:  $('.answer__status'),
-  actions: $('.answer__actions')
+  form:     $('.answer__form'),
+  path:     $('.answer__path'),
+  verb:     $('.answer__verb'),
+  status:   $('.answer__status'),
+  actions:  $('.answer__actions'),
+  advanced: $('.answer__advanced')
 };
 
-let CURRENT_QUESTION;
+const TOGGLES = {
+  basic:    $('.toggle__basic'),
+  advanced: $('.toggle__advanced')
+};
+
+
+// global state //
+let CURRENT_QUESTION, IS_ADVANCED;
 
 const USERNAMES = ["mountain", "thePerson", "geekG1rl", "michaelangelo"];
 const EMAILS    = ["postmaster@mac.com", "welcome@makersacademy.com", "masterofthings123@hotmail.com", "stephanie.lawyer@me.com"];
@@ -43,7 +51,7 @@ const RESOURCES = [
   { 
     name: "bookmark",
     properties: [{
-      name: "URL",
+      name: "url",
       values: URLS
     }]
   }, 
@@ -64,7 +72,7 @@ const RESOURCES = [
   { 
     name: "session",
     properties: [{
-      name: "<code>userReference</code>",
+      name: "userReference",
       values: USER_REFERENCES
     }]
   }
@@ -75,31 +83,36 @@ const ROUTE_TEMPLATES = [
     verb: "POST",
     path: "/resources",
     stateChange: 1,
-    transitionTemplate: 'Create a new resource with a property of "value".'
+    transitionTemplate: 'Create a new resource with a property of "value".',
+    params: true
   },
   {
     verb: "GET",
     path: "/resources",
     stateChange: 0,
-    transitionTemplate: 'Take a look at all the resources.'
+    transitionTemplate: 'Take a look at all the resources.',
+    params: false
   },
   {
     verb: "GET",
     path: "/resources/id",
     stateChange: 0,
-    transitionTemplate: 'Take a look at the resource with an ID of id.'
+    transitionTemplate: 'Take a look at the resource with an ID of id.',
+    params: false
   },
   {
     verb: "PUT",
     path: "/resources/id",
     stateChange: 0,
-    transitionTemplate: 'Change the property of the resource with an ID of id to "value".'
+    transitionTemplate: 'Change the property of the resource with an ID of id to "value".',
+    params: true
   },
   {
     verb: "DELETE",
     path: "/resources/id",
     stateChange: -1,
-    transitionTemplate: 'Delete the resource with an ID of id.'
+    transitionTemplate: 'Delete the resource with an ID of id.',
+    params: false
   }
 ];
 
@@ -118,6 +131,12 @@ const buildQuestion = () => {
   const values = resource.properties.find(search => search.name === property).values;
   const value = values[Math.floor(Math.random() * resource.properties.length)];
 
+  let params = {};
+
+  if(routeTemplate.params) {
+    params = JSON.parse(`{"${property}":"${value}"}`);
+  };
+
   const path = routeTemplate.path.replace("resource", resource.name).replace("id", id);
 
   const startState = STATE_TEMPLATE.replace("resource", resource.name).replace("randomnumber", startNumber);
@@ -125,7 +144,7 @@ const buildQuestion = () => {
 
   const transitionText = routeTemplate.transitionTemplate.replace("resource", resource.name).replace("id", id).replace("property", property).replace("value", value)
 
-  return {
+  let question = {
     question: {
       startState: startState,
       transition: transitionText,
@@ -134,8 +153,17 @@ const buildQuestion = () => {
     answer: {
       verb: routeTemplate.verb,
       path: path
+    },
+    advanced: {
+      params: params
     }
   }
+
+  if(IS_ADVANCED) {
+    question.answer = { ...question.answer, params: params }
+  };
+
+  return question;
 };
 
 const renderStates = (question) => {
@@ -201,6 +229,7 @@ const isEquivalent = (userAnswer, correctAnswer) => {
 
   for (let i = 0; i < userAnswerProps.length; i++) {
     const answerComponent = userAnswerProps[i];
+    if(answerComponent === 'params') { return isEquivalent(userAnswer[answerComponent], correctAnswer[answerComponent]) };
     if (userAnswer[answerComponent] !== correctAnswer[answerComponent]) return false;
   }
 
@@ -210,16 +239,59 @@ const isEquivalent = (userAnswer, correctAnswer) => {
 const handleSubmit = (e) => {
   e.preventDefault();
   
-  const userAnswer = {
+  let userAnswer = {
     verb: ANSWER_COMPONENTS.verb.find('select').val(),
-    path: ANSWER_COMPONENTS.path.find('input').val()
+    path: ANSWER_COMPONENTS.path.find('input').val().replace(/\s/g,'')
   };
 
-  console.log(userAnswer);
-  console.log(CURRENT_QUESTION.answer)
+  if(IS_ADVANCED) {
+    let params = ANSWER_COMPONENTS.advanced.find('input').val();
+
+    if(params === "") { params = "{}" };
+
+    userAnswer = { ...userAnswer, params: JSON5.parse(params) }
+  };
 
   handleAnswer(isEquivalent(userAnswer, CURRENT_QUESTION.answer))
 };
 
+const addAdvancedElements = () => {
+  const input = `<label for="params">Params</label><input type="text" name="params" placeholder="e.g. { name: 'awesome' }" />`;
+  ANSWER_COMPONENTS.advanced.html(input);
+};
+
+const removeAdvancedElements = () => {
+  ANSWER_COMPONENTS.advanced.html("");
+};
+
+const enableAdvancedAnswer = () => {
+  const advancedAnswer = { ...CURRENT_QUESTION.answer, params: CURRENT_QUESTION.advanced.params };
+  CURRENT_QUESTION.answer = advancedAnswer;
+};
+
+const disableAdvancedAnswer = () => {
+  const { params, ...basicAnswer } = CURRENT_QUESTION.answer;
+  CURRENT_QUESTION.answer = basicAnswer;
+};
+
+const setAdvanced = (isAdvanced) => {
+  IS_ADVANCED = isAdvanced;
+  const SELECTED_CLASS = 'toggle--selected';
+  if(isAdvanced) {
+    TOGGLES.basic.removeClass(SELECTED_CLASS);
+    TOGGLES.advanced.addClass(SELECTED_CLASS);
+    addAdvancedElements();
+    enableAdvancedAnswer();
+  } else {
+    TOGGLES.basic.addClass(SELECTED_CLASS);
+    TOGGLES.advanced.removeClass(SELECTED_CLASS);
+    removeAdvancedElements();
+    disableAdvancedAnswer();
+  }
+};
+
 renderQuestion();
+setAdvanced(false);
 ANSWER_COMPONENTS.form.on('submit', handleSubmit);
+TOGGLES.basic.on('click', () => { setAdvanced(false) });
+TOGGLES.advanced.on('click', () => { setAdvanced(true) });
