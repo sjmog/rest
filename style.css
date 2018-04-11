@@ -50,6 +50,24 @@ table {
 STYLES
 */
 
+h1 {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em !important;
+  color: #cdcdcd;
+}
+
+.navigation {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em !important;
+  color: #cdcdcd;
+}
+
 body {
   transition: background 0.1s ease-in-out;
 }
@@ -79,15 +97,16 @@ body {
   height: 80px;
   display: flex;
   flex-direction: column;
+  line-height: 1.5;
   justify-content: center;
 }
 
-.question__part:first-of-type {
-  border-right: none;
+.question__part:not(:first-of-type) {
+  border-left: none;
 }
 
 .question__part h2 {
-  margin-bottom: 1rem;
+  margin-bottom: 0.6rem;
 }
 
 .answer {
@@ -138,6 +157,12 @@ input[type="text"] {
   padding-left: 0.8rem;
 }
 
+select {
+  display: block;
+  height: 50px;
+  font-size: 24px;
+}
+
 input[type="submit"], button {
   height: 50px;
   width: 200px;
@@ -168,7 +193,7 @@ input[type="submit"]:focus, button:focus {
   border-color: #222;
 }
 
-h1, h2, p, input, label, button {
+h1, h2, p, input, label, button, select, a {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
   font-weight: 300;
   letter-spacing: 0.02em

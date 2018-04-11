@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Learn RESTful routing</title>
+  <script
+    src="https://code.jquery.com/jquery-2.2.4.min.js"
+    integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" type="text/css" href="./style.css">
+</head>
+<body>
+  <main class="question">
+    <div class="question__part">
+      <h2>Current Application State</h2>
+      <p class="question__state"></p>
+    </div>
+
+    <div class="question__part">
+      <h2>State Transition details</h2>
+      <p class="question__state-transition"></p>
+    </div>
+
+    <div class="question__part">
+      <h2>Desired Application State</h2>
+      <p class="question__desired-state"></p>
+    </div>
+  </main>
+
+  <h1>Designing RESTful routes</h1>
+
+  <a href="./index.html" class="navigation">Go to 'Understanding Resources and States'</a>
+
+  <aside class="answer">
+    <form class="answer__form">
+      <div class="answer__fieldset">
+        <div class="answer__part">
+          <div class="answer__verb">
+            <label for="verb">HTTP verb</label>
+            <select name="verb">
+              <option value="null">Select a verb</option>
+              <option value="POST">POST</option>
+              <option value="GET">GET</option>
+              <option value="PUT">PUT</option>
+              <option value="DELETE">DELETE</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="answer__part">
+          <div class="answer__path">
+            <label for="path">Path</label>
+            <input type="text" name="path" placeholder="e.g. /bookmarks" />
+          </div>
+        </div>
+      </div>
+
+      <div class="answer__fieldset">
+        <input type="submit" value="Submit" />
+      </div>
+    </form>
+
+    <div class="answer__status"></div>
+    <div class="answer__actions"></div>
+  </aside>
+
+  <script type="text/javascript" src="./route.js"></script>
+</body>
+</html>

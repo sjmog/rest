@@ -179,4 +179,4 @@ const handleSubmit = (e) => {
 };
 
 renderQuestion();
-ANSWER_COMPONENTS.form.on('submit', handleSubmit)
+ANSWER_COMPONENTS.form.on('submit', handleSubmit);
