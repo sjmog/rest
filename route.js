@@ -178,6 +178,7 @@ const resetAnswerForm = () => {
   ANSWER_COMPONENTS.status.text("");
   $('.button--next').remove();
   $('.button--retry').remove();
+  ANSWER_COMPONENTS.advanced.find('input').val("");
 };
 
 const renderNextButton = () => {
