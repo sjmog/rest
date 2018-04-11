@@ -250,7 +250,17 @@ const handleSubmit = (e) => {
 
     if(params === "") { params = "{}" };
 
-    userAnswer = { ...userAnswer, params: JSON5.parse(params) }
+    let parsedParams;
+
+    try {
+      // JSON5 is relaxed JSON to be less harsh on the studes
+      parsedParams = JSON5.parse(params);
+    } catch {
+      // they gave some really invalid JSON
+      return handleAnswer(false);
+    };
+
+    userAnswer = { ...userAnswer, params: parsedParams }
   };
 
   handleAnswer(isEquivalent(userAnswer, CURRENT_QUESTION.answer))
