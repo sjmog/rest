@@ -255,7 +255,7 @@ const handleSubmit = (e) => {
     try {
       // JSON5 is relaxed JSON to be less harsh on the studes
       parsedParams = JSON5.parse(params);
-    } catch {
+    } catch (e) {
       // they gave some really invalid JSON
       return handleAnswer(false);
     };
