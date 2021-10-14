@@ -4,7 +4,7 @@
 
 - REST stands for **RE**presentational **S**tate **T**ransfer.
 - It is an **architectural style** for web services & systems to communicate with each other. 
-- REST compliant ayatem architectures are often called 'RESTful'.
+- REST compliant system architectures are often called 'RESTful'.
 - RESTful architectures follow some basic guiding principles/constraints. (listed below)
 
 ### The 6 Guiding Principles of RESTful Architectures
