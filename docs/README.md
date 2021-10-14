@@ -2,6 +2,20 @@
 
 ### The big idea
 
+- REST stands for **RE**presentational **S**tate **T**ransfer.
+- It is an **architectural style** for web services & systems to communicate with each other. 
+- REST compliant ayatem architectures are often called 'RESTful'.
+- RESTful architectures follow some basic guiding principles/constraints. (listed below)
+
+### The 6 Guiding Principles of RESTful Architectures
+
+1. Uniform Interface
+2. Separation of Client & Server
+3. Stateless
+4. Cacheable
+5. Layered System
+6. Code on Demand _(optional)_
+
 #### Resources
 
 The web is a network of **resources**. A resource is some data stored somewhere. Here are some examples of resources:
@@ -47,3 +61,10 @@ For each of these, a RESTful route defines the **next state** of the machine, an
 * A well-designed application is a **state machine**. That is, it is a machine capable of being in various states.
 * Using GET, DELETE, POST and so on, with well-formed URIs, is the way that a user navigates through different states of the machine.
 * Each action the user takes returns a resource showing the next state of the application.
+
+### Resources
+
+You can learn more about REST here:
+- [What is REST? | Codecademy](https://www.codecademy.com/articles/what-is-rest)
+- [What is REST? | REST API TUtorial](https://restfulapi.net)
+- [Representational State Transfer (REST)](https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm)
